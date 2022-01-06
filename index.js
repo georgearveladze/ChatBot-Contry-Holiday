@@ -5,17 +5,26 @@ require('dotenv').config()
 const { TELEGRAM_TOKEN } = process.env
 const bot = new TelegramBot(TELEGRAM_TOKEN, { polling: true })
 
+const button = {
+  reply_markup: {
+    keyboard: [['/start']],
+    resize_keyboard: true,
+    one_time_keyboard: true,
+    force_reply: true,
+  },
+}
+
 bot.on('message', (msg) => {
+  const firstName = msg.from.first_name
   const {
     chat: { id },
   } = msg
   if (msg.text === '/start') {
-    bot.sendMessage(id, 'Please enter your country...', {
+    bot.sendMessage(id, `Please enter your country...`, {
       reply_markup: {
         keyboard: [
           [
             flags.countryCodeEmoji('GE'),
-            flags.countryCodeEmoji('RU'),
             flags.countryCodeEmoji('TR'),
             flags.countryCodeEmoji('UA'),
             flags.countryCodeEmoji('US'),
@@ -31,7 +40,6 @@ bot.on('message', (msg) => {
     })
   } else if (
     msg.text === flags.countryCodeEmoji('GE') ||
-    msg.text === flags.countryCodeEmoji('RU') ||
     msg.text === flags.countryCodeEmoji('TR') ||
     msg.text === flags.countryCodeEmoji('UA') ||
     msg.text === flags.countryCodeEmoji('US') ||
@@ -42,9 +50,7 @@ bot.on('message', (msg) => {
     const country = flags.emojiCountryCode(msg.text)
     tellmeHoliday(country).then((holidays) => bot.sendMessage(id, holidays))
   } else {
-    bot.sendMessage(id, 'unknown command')
-
-    //`${firstName},command failed: ${err.message})`)
+    bot.sendMessage(id, 'unknown command', button)
   }
 })
 
