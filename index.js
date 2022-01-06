@@ -29,8 +29,22 @@ bot.on('message', (msg) => {
         force_reply: true,
       },
     })
-  } else {
+  } else if (
+    msg.text === flags.countryCodeEmoji('GE') ||
+    msg.text === flags.countryCodeEmoji('RU') ||
+    msg.text === flags.countryCodeEmoji('TR') ||
+    msg.text === flags.countryCodeEmoji('UA') ||
+    msg.text === flags.countryCodeEmoji('US') ||
+    msg.text === flags.countryCodeEmoji('CA') ||
+    msg.text === flags.countryCodeEmoji('GB') ||
+    msg.text === flags.countryCodeEmoji('AU')
+  ) {
     const country = flags.emojiCountryCode(msg.text)
     tellmeHoliday(country).then((holidays) => bot.sendMessage(id, holidays))
+  } else {
+    bot.sendMessage(id, 'unknown command')
+
+    //`${firstName},command failed: ${err.message})`)
   }
 })
+
