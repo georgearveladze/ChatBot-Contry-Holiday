@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "axios": "^0.24.0",
+    "country-code-emoji": "^2.3.0",
+    "country-flag-icons": "^1.4.19",
+    "dotenv": "^10.0.0",
+    "node-telegram-bot-api": "^0.56.0"
+  },
+  "name": "chatbot-task-3",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.6.0",
+    "nodemon": "^2.0.15",
+    "prettier": "^2.5.1"
+  },
+  "description": ""
+}
